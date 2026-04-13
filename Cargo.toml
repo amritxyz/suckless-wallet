@@ -1,13 +1,19 @@
 [workspace]
 members = [
-    "programs/*"
+    "programs/drishti-registry",
+    "programs/drishti-core",
 ]
 resolver = "2"
 
+[workspace.dependencies]
+anchor-lang = "0.30.1"
+anchor-spl  = "0.30.1"
+
 [profile.release]
 overflow-checks = true
-lto = "fat"
+lto = "thin"
 codegen-units = 1
+
 [profile.release.build-override]
 opt-level = 3
 incremental = false

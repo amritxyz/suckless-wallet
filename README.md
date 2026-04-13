@@ -68,4 +68,8 @@ yarn install
 anchor build
 ```
 
+//  To run the script:
+//chmod +x dev.sh
+./dev.sh
+
 If everything completes successfully, the `./target` directory will be populated with your compiled binary, and you are ready to write business logic!
