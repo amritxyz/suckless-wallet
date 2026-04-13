@@ -56,20 +56,25 @@ solana config set --keypair ~/.config/solana/id.json
 solana config get
 ```
 
-## Running the Project
+## Build
 
-Now that your dependencies are properly scaffolded, you can install the Node modules and verify the build works:
+Use dev.sh — this is the only supported build pipeline.
 
-```bash
-# Install node dependencies
-yarn install
+    bash dev.sh
 
-# Build the Anchor program (this compiles the BPF payload and establishes the IDL)
-anchor build
-```
+Manual steps (what dev.sh does internally):
 
-//  To run the script:
-//chmod +x dev.sh
-./dev.sh
+1. Build programs (no IDL):
+       anchor build --no-idl
 
-If everything completes successfully, the `./target` directory will be populated with your compiled binary, and you are ready to write business logic!
+2. Generate IDL (requires nightly-2024-11-01 toolchain):
+       RUSTUP_TOOLCHAIN=nightly-2024-11-01 anchor idl build \
+         --program-name drishti_core
+       RUSTUP_TOOLCHAIN=nightly-2024-11-01 anchor idl build \
+         --program-name drishti_registry
+
+3. Run tests against pre-built artifacts:
+       anchor test --skip-build
+
+Do NOT run `anchor build` alone — IDL generation will fail.
+Do NOT run `cargo update` — the lockfile pins are intentional.

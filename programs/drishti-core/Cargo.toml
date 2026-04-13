@@ -19,4 +19,3 @@ idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
 [dependencies]
 anchor-lang = { workspace = true, features = ["init-if-needed"] }
 anchor-spl  = { workspace = true, features = ["token_2022", "token_2022_extensions"] }
-borsh = "1.5.1"
